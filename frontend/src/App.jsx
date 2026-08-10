@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 function App() {
   const [stock, setStock] = useState(10);
   const [message, setMessage] = useState('');
@@ -12,7 +14,7 @@ function App() {
     setLoading(true);
     setMessage('');
     try {
-      const response = await axios.post('http://localhost:5000/api/flash-sale/purchase', {
+      const response = await axios.post(`${API_BASE_URL}/api/flash-sale/purchase`, {
         productId,
         quantity: 1,
         price: 99.99,
@@ -29,7 +31,7 @@ function App() {
 
   const handleRestock = async () => {
     try {
-      await axios.post('http://localhost:5000/api/flash-sale/init', {
+      await axios.post(`${API_BASE_URL}/api/flash-sale/init`, {
         productId,
         totalStock: 10
       });
@@ -69,7 +71,7 @@ function App() {
         </div>
 
         {message && (
-          <div style={{ marginTop: '20px', padding: '10px', background: message.includes('Success') ? '#c6f6d5' : '#fed7d7', color: message.includes('Success') ? '#22543d' : '#9b2c2c', borderRadius: '5px' }}>
+          <div style={{ marginTop: '20px', padding: '10px', background: message.includes('Success') || message.includes('restocked') ? '#c6f6d5' : '#fed7d7', color: message.includes('Success') || message.includes('restocked') ? '#22543d' : '#9b2c2c', borderRadius: '5px' }}>
             {message}
           </div>
         )}
