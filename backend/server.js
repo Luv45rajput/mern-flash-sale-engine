@@ -1,10 +1,3 @@
-const cors = require('cors');
-const express = require('express');
-const app = express();
-
-app.use(cors()); // <-- Add this line right here before your routes!
-app.use(express.json());
-
 require('dotenv').config(); // Must be at the very top to load env variables!
 const express = require('express');
 const cors = require('cors');
@@ -32,7 +25,6 @@ const flashSaleRoutes = require('./routes/flashSaleRoutes');
 app.use('/api/flash-sale', flashSaleRoutes);
 
 const PORT = process.env.PORT || 5000;
-
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
