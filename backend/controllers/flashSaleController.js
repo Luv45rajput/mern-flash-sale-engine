@@ -1,5 +1,5 @@
 const redisClient = require('../config/redis');
-const Order = require('../models/order');
+const Order = require('../models/Order');
 const Product = require('../models/product');
 
 // Initialize Flash Sale Stock in Redis
